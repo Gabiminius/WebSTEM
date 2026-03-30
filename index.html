@@ -1,96 +1,451 @@
 <!DOCTYPE html>
-<html lang="es">
+<html lang="es" >
 <head>
-  <meta charset="UTF-8">
-  <title>Web de mi hermana</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-
-  <!-- Bootstrap -->
-  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
-
-  <!-- Tu CSS -->
-  <link rel="stylesheet" href="style.css">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>LabBridge - Tu práctica ideal encontrada por IA</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            'bridge-blue': '#0047FF',
+            'bridge-dark': '#001F7A',
+            'bridge-cyan': '#00AFFF',
+            'bridge-lightblue': '#009FFF',
+            'bridge-whitebg': '#ffffff',
+            'bridge-darktext': '#001F7A',
+          },
+          animation: {
+            'fade-in': 'fadeIn 1s ease-in-out',
+            'slide-up': 'slideUp 0.8s ease-out',
+          },
+          keyframes: {
+            fadeIn: {
+              '0%': { opacity: '0', transform: 'translateY(20px)' },
+              '100%': { opacity: '1', transform: 'translateY(0)' }
+            },
+            slideUp: {
+              '0%': { opacity: '0', transform: 'translateY(30px)' },
+              '100%': { opacity: '1', transform: 'translateY(0)' }
+            }
+          }
+        }
+      }
+    }
+  </script>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
+    body {
+      font-family: 'Inter', sans-serif;
+      background: #fff;
+      color: #001F7A;
+      -webkit-font-smoothing: auto;
+      -moz-osx-font-smoothing: auto;
+      font-smoothing: auto;
+      text-shadow: none !important;
+    }
+    .hover-lift:hover {
+      transform: translateY(-8px);
+    }
+    .sticky-cta {
+      position: fixed;
+      bottom: 20px;
+      right: 20px;
+      z-index: 1000;
+    }
+    @media (max-width: 768px) {
+      .sticky-cta {
+        bottom: 10px;
+        right: 10px;
+      }
+    }
+    /* Remove fades or blurry text by disabling bg-clip + transparent text effect and no text-shadow */
+    /* We'll do solid colors instead */
+    h1, h2, h3, p, a, li, summary {
+      text-shadow: none !important;
+    }
+  </style>
 </head>
 
 <body>
-<!-- Bootstrap -->
-<nav class="navbar navbar-expand-lg bg-body-tertiary" data-bs-theme="dark">
-  <div class="container-fluid" >
-  
-    <a class="navbar-brand" href="#">
-      <img src="img/logo.webp" alt="Logo" width="30" height="24" class="d-inline-block align-text-top">
-    </a>
-    <a class="navbar-brand" href="#">Navbar</a>
-     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="true" aria-label="Toggle navigation">
-      <span class="navbar-toggler-icon"></span>
-    </button>
-    <div class="collapse navbar-collapse" id="navbarNavDropdown">
-      <ul class="navbar-nav">
-        <li class="nav-item">
-          <a class="nav-link active" aria-current="page" href="#">Home</a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link" href="#">Features</a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link" href="#">Pricing</a>
-        </li>
-        <li class="nav-item dropdown">
-          <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-            Dropdown link
-          </a>
-          <ul class="dropdown-menu">
-            <li><a class="dropdown-item" href="#">Action</a></li>
-            <li><a class="dropdown-item" href="#">Another action</a></li>
-            <li><a class="dropdown-item" href="#">Something else here</a></li>
-          </ul>
-        </li>
-      </ul>
+    
+  <!-- Navbar -->
+  <nav class="fixed top-0 w-full z-50 bg-bridge-whitebg border-b border-bridge-lightblue">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="flex justify-between h-16 items-center">
+        <div class="flex items-center space-x-3">
+          <div class="w-10 h-10 rounded-xl overflow-hidden">
+            <img src="logo.jpeg" alt="LabBridge Logo" class="w-full h-full object-cover" />
+          </div>
+          <span class="text-2xl font-bold text-bridge-darktext select-none">LabBridge</span>
+        </div>
+        <div class="hidden md:flex items-center space-x-8">
+          <a href="#hero" class="text-bridge-darktext hover:text-bridge-cyan transition-colors font-medium">Inicio</a>
+          <a href="#solution" class="text-bridge-darktext hover:text-bridge-cyan transition-colors font-medium">Solución</a>
+          <a href="#form" class="text-bridge-darktext hover:text-bridge-cyan transition-colors font-medium">Postular</a>
+        </div>
+        <div class="md:hidden flex items-center">
+          <button class="text-bridge-darktext hover:text-bridge-cyan focus:outline-none">
+            <i class="fas fa-bars text-2xl"></i>
+          </button>
+        </div>
+      </div>
     </div>
-  </div>
-</nav>
+  </nav>
 
-<!-- 🟢 HERO -->
-<section id="inicio" class="bg-light text-center p-5">
-  <div class="container">
-    <h1 class="display-4">Bienvenidos</h1>
-    <p class="lead">La mejor solución para ti</p>
-    <a href="#contacto" class="btn btn-primary btn-lg">Contáctanos</a>
-  </div>
-</section>
-
-
-
-<!-- 🟡 CONTACTO -->
-<section id="contacto" class="bg-light p-5">
-  <div class="container">
-    <h2 class="text-center mb-4">Contacto</h2>
-
-    <form>
-      <div class="mb-3">
-        <input type="text" class="form-control" placeholder="Nombre">
+  <!-- Hero Section -->
+  <section id="hero" class="min-h-screen flex items-center justify-center pt-16 pb-20 px-4 bg-bridge-whitebg">
+    <div class="max-w-7xl mx-auto grid md:grid-cols-2 gap-14 items-center">
+      <div class="space-y-8 animate-fade-in">
+        <h1 class="text-5xl md:text-7xl font-extrabold leading-tight tracking-tight text-bridge-darktext select-none">
+          Tu práctica en investigación<br />ideal, encontrada por IA
+        </h1>
+        <p class="text-xl md:text-2xl text-bridge-darktext/90 max-w-lg leading-relaxed font-medium">
+          Conecta con labs internacionales que realmente te necesitan. Matching inteligente por habilidades técnicas + fit cultural.
+        </p>
+        <div class="flex flex-col sm:flex-row gap-5 max-w-max">
+          <a href="#form" class="group bg-bridge-cyan text-bridge-whitebg px-12 py-5 rounded-3xl font-semibold text-lg hover:bg-bridge-lightblue transition-all duration-300 hover-lift shadow-2xl hover:shadow-bridge-lightblue/40 w-full sm:w-auto text-center select-none">
+            <i class="fas fa-rocket mr-3 group-hover:translate-x-1 transition-transform"></i> Postula ahora
+          </a>
+        </div>
       </div>
-
-      <div class="mb-3">
-        <input type="email" class="form-control" placeholder="Correo">
+      <div class="relative">
+        <div class="w-full h-96 bg-bridge-whitebg border border-bridge-cyan rounded-3xl p-8 flex flex-col justify-center items-center animate-slide-up shadow-xl">
+          <div class="w-20 h-20 bg-bridge-cyan rounded-2xl flex items-center justify-center mx-auto mb-6 shadow-lg shadow-bridge-cyan/50">
+            <i class="fas fa-brain text-bridge-whitebg text-4xl"></i>
+          </div>
+          <div class="text-center space-y-4 select-none">
+            <div class="w-36 h-3 bg-bridge-cyan rounded-full mx-auto animate-pulse"></div>
+            <div class="flex items-center justify-center space-x-2 text-bridge-cyan font-medium tracking-wide">
+              <div class="w-4 h-4 bg-bridge-cyan animate-ping rounded-full"></div>
+              <span>IA analizando...</span>
+            </div>
+          </div>
+        </div>
       </div>
+    </div>
+  </section>
 
-      <div class="mb-3">
-        <textarea class="form-control" placeholder="Mensaje"></textarea>
+  <!-- Problem Section -->
+  <section class="py-32 px-4 bg-bridge-whitebg">
+    <div class="max-w-4xl mx-auto text-center">
+      <h2 class="text-4xl md:text-5xl font-bold text-bridge-darktext mb-10 animate-fade-in select-none">El problema actual</h2>
+      <div class="grid md:grid-cols-3 gap-8 mt-12">
+        <div class="bg-bridge-whitebg border border-bridge-cyan p-8 rounded-3xl hover-lift transition-all duration-300 shadow-lg animate-slide-up" style="animation-delay: 0.1s">
+          <div class="w-16 h-16 bg-bridge-cyan rounded-2xl flex items-center justify-center mx-auto mb-6 shadow-md">
+            <i class="fas fa-search text-bridge-whitebg text-2xl"></i>
+          </div>
+          <h3 class="text-2xl font-semibold mb-4 text-bridge-darktext select-none">No saben dónde postular</h3>
+          <p class="text-bridge-darktext/95 leading-relaxed">Miles de labs, cero claridad. Los estudiantes aplican a ciegas sin saber qué grupos realmente los necesitan.</p>
+        </div>
+        <div class="bg-bridge-whitebg border border-bridge-cyan p-8 rounded-3xl hover-lift transition-all duration-300 shadow-lg animate-slide-up" style="animation-delay: 0.2s">
+          <div class="w-16 h-16 bg-bridge-cyan rounded-2xl flex items-center justify-center mx-auto mb-6 shadow-md">
+            <i class="fas fa-envelope text-bridge-whitebg text-2xl"></i>
+          </div>
+          <h3 class="text-2xl font-semibold mb-4 text-bridge-darktext select-none">Aplicaciones sin respuesta</h3>
+          <p class="text-bridge-darktext/95 leading-relaxed">CVs enviados al vacío. 90% de postulaciones nunca reciben feedback ni tienen match real.</p>
+        </div>
+        <div class="bg-bridge-whitebg border border-bridge-cyan p-8 rounded-3xl hover-lift transition-all duration-300 shadow-lg animate-slide-up" style="animation-delay: 0.3s">
+          <div class="w-16 h-16 bg-bridge-cyan rounded-2xl flex items-center justify-center mx-auto mb-6 shadow-md">
+            <i class="fas fa-users-slash text-bridge-whitebg text-2xl"></i>
+          </div>
+          <h3 class="text-2xl font-semibold mb-4 text-bridge-darktext select-none">Falta de match real</h3>
+          <p class="text-bridge-darktext/95 leading-relaxed">Sin análisis de fit cultural ni técnico. Conexiones forzadas que no funcionan.</p>
+        </div>
       </div>
+    </div>
+  </section>
 
-      <button class="btn btn-primary">Enviar</button>
-    </form>
-  </div>
-</section>
+  <!-- Solution Section -->
+  <section id="solution" class="py-32 px-4 bg-bridge-whitebg">
+    <div class="max-w-6xl mx-auto">
+      <div class="text-center mb-20 animate-fade-in select-none">
+        <h2 class="text-4xl md:text-5xl font-bold text-bridge-darktext mb-6">Cómo funciona</h2>
+        <p class="text-xl text-bridge-darktext max-w-2xl mx-auto font-medium">
+          En 3 pasos simples, la IA encuentra tu match perfecto
+        </p>
+      </div>
+      <div class="grid md:grid-cols-3 gap-8">
+        <div class="text-center animate-slide-up" style="animation-delay: 0.1s">
+          <div class="w-20 h-20 bg-bridge-cyan text-bridge-whitebg rounded-3xl flex items-center justify-center mx-auto mb-6 font-bold text-xl select-none">1</div>
+          <h3 class="text-2xl font-semibold mb-4 text-bridge-darktext">Crea tu perfil</h3>
+          <p class="text-bridge-darktext leading-relaxed mb-8 max-w-sm mx-auto">Habilidades técnicas, intereses, preferencias culturales y estilo de trabajo.</p>
+          <div class="w-24 h-24 border-4 border-bridge-cyan rounded-full mx-auto flex items-center justify-center">
+            <i class="fas fa-user text-bridge-cyan text-3xl"></i>
+          </div>
+        </div>
+        <div class="text-center animate-slide-up" style="animation-delay: 0.2s">
+          <div class="w-20 h-20 bg-bridge-cyan text-bridge-whitebg rounded-3xl flex items-center justify-center mx-auto mb-6 font-bold text-xl select-none">2</div>
+          <h3 class="text-2xl font-semibold mb-4 text-bridge-darktext">IA analiza</h3>
+          <p class="text-bridge-darktext leading-relaxed mb-8 max-w-sm mx-auto">Nuestro algoritmo compara tu perfil con +5,000 labs internacionales en tiempo real.</p>
+          <div class="w-24 h-24 border-4 border-bridge-cyan rounded-full mx-auto flex items-center justify-center">
+            <i class="fas fa-brain text-bridge-cyan text-3xl"></i>
+          </div>
+        </div>
+        <div class="text-center animate-slide-up" style="animation-delay: 0.3s">
+          <div class="w-20 h-20 bg-bridge-cyan text-bridge-whitebg rounded-3xl flex items-center justify-center mx-auto mb-6 font-bold text-xl select-none">3</div>
+          <h3 class="text-2xl font-semibold mb-4 text-bridge-darktext">Match perfecto</h3>
+          <p class="text-bridge-darktext leading-relaxed mb-8 max-w-sm mx-auto">Recibe invitaciones directas de labs que realmente te quieren. Sin spam, solo oportunidades reales.</p>
+          <div class="w-24 h-24 border-4 border-bridge-cyan rounded-full mx-auto flex items-center justify-center">
+            <i class="fas fa-handshake text-bridge-cyan text-3xl"></i>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
 
-<!-- ⚫ FOOTER -->
-<footer class="bg-dark text-white text-center p-3">
-  <p>© 2026 Mi Marca</p>
-</footer>
+  <!-- Value Proposition -->
+  <section class="py-32 px-4 bg-bridge-whitebg">
+    <div class="max-w-4xl mx-auto text-center select-none">
+      <h2 class="text-4xl md:text-5xl font-bold text-bridge-darktext mb-16 animate-fade-in">Por qué somos diferentes</h2>
+      <div class="grid md:grid-cols-3 gap-8">
+        <div class="bg-bridge-whitebg border border-bridge-cyan p-10 rounded-3xl hover-lift group transition-all duration-300 shadow-lg animate-slide-up" style="animation-delay: 0.1s">
+          <div class="w-20 h-20 bg-bridge-cyan/20 group-hover:bg-bridge-cyan/50 rounded-2xl flex items-center justify-center mx-auto mb-6 transition-colors shadow-md">
+            <i class="fas fa-microchip text-bridge-cyan text-3xl group-hover:scale-110 transition-transform"></i>
+          </div>
+          <h3 class="text-2xl font-semibold mb-6 text-bridge-darktext">Matching inteligente</h3>
+          <p class="text-bridge-darktext leading-relaxed">No es una bolsa de trabajo. Nuestra IA analiza papers, GitHub y cultura de labs para matches precisos.</p>
+        </div>
+        <div class="bg-bridge-whitebg border border-bridge-cyan p-10 rounded-3xl hover-lift group transition-all duration-300 shadow-lg animate-slide-up" style="animation-delay: 0.2s">
+          <div class="w-20 h-20 bg-bridge-cyan/20 group-hover:bg-bridge-cyan/50 rounded-2xl flex items-center justify-center mx-auto mb-6 transition-colors shadow-md">
+            <i class="fas fa-globe text-bridge-cyan text-3xl group-hover:scale-110 transition-transform"></i>
+          </div>
+          <h3 class="text-2xl font-semibold mb-6 text-bridge-darktext">Fit técnico + cultural</h3>
+          <p class="text-bridge-darktext leading-relaxed">95% de éxito en colocaciones. Analizamos skills + fit cultural para relaciones duraderas.</p>
+        </div>
+        <div class="bg-bridge-whitebg border border-bridge-cyan p-10 rounded-3xl hover-lift group transition-all duration-300 shadow-lg animate-slide-up" style="animation-delay: 0.3s">
+          <div class="w-20 h-20 bg-bridge-cyan/20 group-hover:bg-bridge-cyan/50 rounded-2xl flex items-center justify-center mx-auto mb-6 transition-colors shadow-md">
+            <i class="fas fa-flask text-bridge-cyan text-3xl group-hover:scale-110 transition-transform"></i>
+          </div>
+          <h3 class="text-2xl font-semibold mb-6 text-bridge-darktext">Investigación real</h3>
+          <p class="text-bridge-darktext leading-relaxed">Solo labs activos con publicaciones recientes. Prácticas con impacto real en ciencia.</p>
+        </div>
+      </div>
+    </div>
+  </section>
 
-<!-- Bootstrap JS -->
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+  <!-- Testimonials -->
+  <section class="py-32 px-4 bg-bridge-whitebg">
+    <div class="max-w-4xl mx-auto text-center select-none">
+      <h2 class="text-4xl md:text-5xl font-bold text-bridge-darktext mb-16 animate-fade-in">Estudiantes como tú</h2>
+      <div class="grid md:grid-cols-3 gap-8">
+        <div class="bg-bridge-whitebg border border-bridge-cyan p-10 rounded-3xl hover-lift shadow-lg animate-slide-up" style="animation-delay: 0.1s">
+          <div class="flex items-center justify-center w-20 h-20 bg-bridge-cyan rounded-full mx-auto mb-6 shadow-md">
+            <i class="fas fa-user-graduate text-bridge-whitebg text-3xl"></i>
+          </div>
+          <p class="text-bridge-darktext italic mb-6 leading-relaxed">"En 48h recibí 3 invitaciones de labs en Stanford y ETH. La IA realmente entiende mis skills en ML."</p>
+          <div class="flex items-center justify-center">
+            <div class="w-16 h-0.5 bg-bridge-cyan mr-4 rounded"></div>
+            <div>
+              <p class="font-semibold text-bridge-darktext">María G.</p>
+              <p class="text-sm text-bridge-darktext/70">Ingeniería IA, UNAM</p>
+            </div>
+          </div>
+        </div>
+        <div class="bg-bridge-whitebg border border-bridge-cyan p-10 rounded-3xl hover-lift shadow-lg animate-slide-up" style="animation-delay: 0.2s">
+          <div class="flex items-center justify-center w-20 h-20 bg-bridge-cyan rounded-full mx-auto mb-6 shadow-md">
+            <i class="fas fa-user-graduate text-bridge-whitebg text-3xl"></i>
+          </div>
+          <p class="text-bridge-darktext italic mb-6 leading-relaxed">"Postulé a 50 labs manualmente. Con LabBridge obtuve match perfecto en Berkeley en 1 semana."</p>
+          <div class="flex items-center justify-center">
+            <div class="w-16 h-0.5 bg-bridge-cyan mr-4 rounded"></div>
+            <div>
+              <p class="font-semibold text-bridge-darktext">Juan P.</p>
+              <p class="text-sm text-bridge-darktext/70">Física Computacional, USP</p>
+            </div>
+          </div>
+        </div>
+        <div class="bg-bridge-whitebg border border-bridge-cyan p-10 rounded-3xl hover-lift shadow-lg animate-slide-up" style="animation-delay: 0.3s">
+          <div class="flex items-center justify-center w-20 h-20 bg-bridge-cyan rounded-full mx-auto mb-6 shadow-md">
+            <i class="fas fa-user-graduate text-bridge-whitebg text-3xl"></i>
+          </div>
+          <p class="text-bridge-darktext italic mb-6 leading-relaxed">"El análisis cultural fue perfecto. Estoy en un lab que encaja 100% con mi forma de trabajar."</p>
+          <div class="flex items-center justify-center">
+            <div class="w-16 h-0.5 bg-bridge-cyan mr-4 rounded"></div>
+            <div>
+              <p class="font-semibold text-bridge-darktext">Ana L.</p>
+              <p class="text-sm text-bridge-darktext/70">Bioinformática, UBA</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
 
+  <!-- Credibility -->
+  <section class="py-32 px-4 bg-bridge-whitebg">
+    <div class="max-w-6xl mx-auto text-center animate-fade-in select-none">
+      <h2 class="text-4xl md:text-5xl font-bold text-bridge-darktext mb-16">Tecnología seria, resultados reales</h2>
+      <div class="grid md:grid-cols-2 gap-16 items-center">
+        <div class="space-y-8 text-left">
+          <div class="bg-bridge-whitebg p-8 rounded-2xl border border-bridge-cyan">
+            <h3 class="text-2xl font-semibold text-bridge-darktext mb-4">Esto NO es una agencia de viajes</h3>
+            <p class="text-bridge-darktext leading-relaxed">
+              LabBridge es una plataforma tecnológica que utiliza IA avanzada para análisis de datos y matching, no simplemente envío de listas.
+            </p>
+          </div>
+          <div class="bg-bridge-whitebg p-8 rounded-2xl border border-bridge-cyan">
+            <h3 class="text-2xl font-semibold text-bridge-darktext mb-4">Matching basado en datos reales</h3>
+            <p class="text-bridge-darktext leading-relaxed">
+              Analizamos perfiles técnicos, proyectos, publicaciones y fit cultural para asegurar conexiones duraderas y exitosas.
+            </p>
+          </div>
+        </div>
+        <div>
+          <img
+            src="logo.jpeg"
+            alt="LabBridge Logo"
+            class="mx-auto max-w-xs mt-8 md:mt-0 select-none"
+            loading="lazy"
+            draggable="false"
+          />
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Lead Capture Form -->
+  <section id="form" class="py-32 px-4 bg-bridge-whitebg">
+    <div class="max-w-3xl mx-auto text-center select-none">
+      <h2 class="text-4xl font-bold text-bridge-darktext mb-12 animate-fade-in">¿Listo para encontrar tu práctica ideal?</h2>
+      <form class="bg-bridge-whitebg rounded-3xl p-12 border border-bridge-cyan shadow-lg" autocomplete="off" novalidate>
+        <div class="grid grid-cols-1 sm:grid-cols-2 gap-6 mb-6">
+          <input
+            type="text"
+            id="name"
+            name="name"
+            placeholder="Nombre completo"
+            required
+            class="bg-bridge-whitebg border border-bridge-cyan rounded-xl px-4 py-3 text-bridge-darktext placeholder:opacity-70 focus:outline-none focus:ring-2 focus:ring-bridge-cyan focus:border-bridge-cyan transition"
+          />
+          <input
+            type="email"
+            id="email"
+            name="email"
+            placeholder="Email"
+            required
+            class="bg-bridge-whitebg border border-bridge-cyan rounded-xl px-4 py-3 text-bridge-darktext placeholder:opacity-70 focus:outline-none focus:ring-2 focus:ring-bridge-cyan focus:border-bridge-cyan transition"
+          />
+          <input
+            type="text"
+            id="career"
+            name="career"
+            placeholder="Carrera"
+            required
+            class="bg-bridge-whitebg border border-bridge-cyan rounded-xl px-4 py-3 text-bridge-darktext placeholder:opacity-70 focus:outline-none focus:ring-2 focus:ring-bridge-cyan focus:border-bridge-cyan transition"
+          />
+          <input
+            type="text"
+            id="university"
+            name="university"
+            placeholder="Universidad"
+            required
+            class="bg-bridge-whitebg border border-bridge-cyan rounded-xl px-4 py-3 text-bridge-darktext placeholder:opacity-70 focus:outline-none focus:ring-2 focus:ring-bridge-cyan focus:border-bridge-cyan transition"
+          />
+          <select
+            id="year"
+            name="year"
+            required
+            class="sm:col-span-1 bg-bridge-whitebg border border-bridge-cyan rounded-xl px-4 py-3 text-bridge-darktext placeholder:opacity-70 focus:outline-none focus:ring-2 focus:ring-bridge-cyan focus:border-bridge-cyan transition"
+          >
+            <option value="" disabled selected>Año</option>
+            <option>3er Año</option>
+            <option>4to Año</option>
+            <option>5to Año+</option>
+          </select>
+          <input
+            type="text"
+            id="interests"
+            name="interests"
+            placeholder="Intereses (IA, Biología, Física...)"
+            required
+            class="bg-bridge-whitebg border border-bridge-cyan rounded-xl px-4 py-3 text-bridge-darktext placeholder:opacity-70 focus:outline-none focus:ring-2 focus:ring-bridge-cyan focus:border-bridge-cyan transition"
+          />
+        </div>
+        <button
+          type="submit"
+          class="group w-full bg-bridge-cyan text-bridge-whitebg rounded-3xl py-5 font-semibold text-lg hover:bg-bridge-lightblue shadow-lg shadow-bridge-cyan/50 hover-lift transition-all select-none"
+        >
+          <i class="fas fa-paper-plane mr-3 group-hover:translate-x-1 transition-transform"></i> Postula ahora
+        </button>
+      </form>
+    </div>
+  </section>
+
+  <!-- FAQ Section -->
+  <section class="py-32 px-4 bg-bridge-whitebg">
+    <div class="max-w-5xl mx-auto text-center select-none">
+      <h2 class="text-4xl md:text-5xl font-bold text-bridge-darktext mb-20 animate-fade-in">Preguntas frecuentes</h2>
+      <div class="space-y-8 text-left">
+        <details
+          class="bg-bridge-whitebg p-6 rounded-3xl border border-bridge-cyan group open:border-bridge-cyan transition-all"
+        >
+          <summary
+            class="font-semibold text-bridge-darktext cursor-pointer select-none list-none focus:outline-none"
+          >
+            ¿Qué tipo de prácticas ofrecen?
+          </summary>
+          <p class="mt-4 text-bridge-darktext leading-relaxed">
+            Ofrecemos prácticas en laboratorios de investigación STEM en universidades y centros reconocidos internacionalmente, centrados en proyectos reales.
+          </p>
+        </details>
+        <details
+          class="bg-bridge-whitebg p-6 rounded-3xl border border-bridge-cyan group open:border-bridge-cyan transition-all"
+        >
+          <summary
+            class="font-semibold text-bridge-darktext cursor-pointer select-none list-none focus:outline-none"
+          >
+            ¿Cómo funciona el proceso de matching con IA?
+          </summary>
+          <p class="mt-4 text-bridge-darktext leading-relaxed">
+            Nuestra IA analiza tu perfil técnico y cultural, compara con más de 5,000 labs y te conecta directamente con los que mejor encajan.
+          </p>
+        </details>
+        <details
+          class="bg-bridge-whitebg p-6 rounded-3xl border border-bridge-cyan group open:border-bridge-cyan transition-all"
+        >
+          <summary
+            class="font-semibold text-bridge-darktext cursor-pointer select-none list-none focus:outline-none"
+          >
+            ¿Debo pagar por usar LabBridge?
+          </summary>
+          <p class="mt-4 text-bridge-darktext leading-relaxed">
+            No, el servicio para estudiantes es 100% gratuito. Nuestro objetivo es conectar talento con investigación de calidad.
+          </p>
+        </details>
+        <details
+          class="bg-bridge-whitebg p-6 rounded-3xl border border-bridge-cyan group open:border-bridge-cyan transition-all"
+        >
+          <summary
+            class="font-semibold text-bridge-darktext cursor-pointer select-none list-none focus:outline-none"
+          >
+            ¿Puedo postular si estoy en los primeros años de mi carrera?
+          </summary>
+          <p class="mt-4 text-bridge-darktext leading-relaxed">
+            Preferimos estudiantes en últimos años, pero si tienes proyectos relevantes puedes aplicar y nuestra IA evaluará el mejor fit para ti.
+          </p>
+        </details>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer class="bg-bridge-whitebg border-t border-bridge-cyan py-12 select-none">
+    <div
+      class="max-w-7xl mx-auto px-4 text-center text-bridge-darktext text-sm font-medium select-none"
+    >
+      &copy; 2024 LabBridge — STEM Matching Engine. Todos los derechos reservados.
+    </div>
+  </footer>
+
+  <!-- Sticky CTA -->
+  <a
+    href="#form"
+    class="sticky-cta hidden md:flex items-center justify-center bg-bridge-cyan text-bridge-whitebg rounded-full px-8 py-4 font-semibold shadow-lg shadow-bridge-cyan/60 hover:bg-bridge-lightblue hover-lift transition-all select-none"
+    > <i class="fas fa-rocket mr-3"></i> Postula ahora</a
+  >
 </body>
 </html>
