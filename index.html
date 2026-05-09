@@ -5,6 +5,8 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>LabBridge — STEM Matching Engine</title>
   <script src="https://cdn.tailwindcss.com"></script>
+  <!-- EmailJS SDK -->
+  <script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800;900&family=Mulish:wght@300;400;500;600;700&display=swap" rel="stylesheet">
@@ -967,10 +969,9 @@
       Join the waitlist today. Whether you're a STEM student ready to launch your international career or a research center seeking sikilled and culturally-aligned talent — LabBridge is built for you.
     </p>
 
-    <form id="waitlist-form" action="https://formspree.io/f/mojrknkn" method="POST"
-          class="flex flex-col gap-4 max-w-xl mx-auto mb-7">
+    <form id="waitlist-form" class="flex flex-col gap-4 max-w-xl mx-auto mb-7">
       <div class="flex flex-col sm:flex-row gap-4">
-        <input type="email" name="email" placeholder="Enter your email address" required
+        <input type="email" name="to_email" id="to_email" placeholder="Enter your email address" required
                class="flex-1 rounded-2xl px-6 py-4 text-white text-sm placeholder-white/40 focus:outline-none focus:ring-2 focus:ring-[#00FFAB]/50 font-body"
                style="background:rgba(255,255,255,.12);border:1px solid rgba(255,255,255,.22)">
         <button type="submit" id="submit-btn" class="btn-green text-sm px-8 py-4 rounded-2xl whitespace-nowrap">
@@ -979,7 +980,6 @@
         </button>
       </div>
       <input type="hidden" name="user_type" id="user_type" value="Student">
-      <input type="hidden" name="_subject" value="🚀 New LabBridge Waitlist Registration">
     </form>
 
     <!-- Success message -->
@@ -989,9 +989,9 @@
         <svg class="w-6 h-6" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24">
           <path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7"/>
         </svg>
-        You're on the list!
+        You're officially on the list!
       </div>
-      <p class="text-white/70 text-sm">We'll reach out as soon as we launch. Welcome aboard!</p>
+      <p class="text-white/70 text-sm">Check your inbox — we just sent you a welcome email. 🚀</p>
     </div>
 
     <!-- Error message -->
@@ -1003,7 +1003,7 @@
         </svg>
         Something went wrong
       </div>
-      <p class="text-white/70 text-sm">Please try again or email us directly.</p>
+      <p class="text-white/70 text-sm">Please try again in a moment.</p>
     </div>
 
     <div class="flex items-center justify-center gap-2 text-white/45 text-xs mb-10">
@@ -1107,6 +1107,9 @@
     a.addEventListener('click', () => document.getElementById('mob-menu').classList.add('hidden'));
   });
 
+  // ==================== EmailJS Init ====================
+  emailjs.init({ publicKey: "I2oJdZlwdiqOZR39G" });
+
   // Audience tabs
   function setTab(el, type) {
     document.querySelectorAll('.aud-tab').forEach(t => t.classList.remove('active'));
@@ -1114,7 +1117,7 @@
     if (type) document.getElementById('user_type').value = type;
   }
 
-  // Waitlist form submission (Formspree AJAX)
+  // Waitlist form submission via EmailJS
   const waitlistForm = document.getElementById('waitlist-form');
   const successMsg = document.getElementById('success-msg');
   const errorMsg = document.getElementById('error-msg');
@@ -1130,21 +1133,17 @@
     btnLoading.classList.remove('hidden');
     submitBtn.disabled = true;
 
-    const formData = new FormData(waitlistForm);
     try {
-      const response = await fetch(waitlistForm.action, {
-        method: 'POST',
-        body: formData,
-        headers: { 'Accept': 'application/json' }
-      });
-      if (response.ok) {
-        waitlistForm.reset();
-        document.getElementById('user_type').value = 'Student';
-        successMsg.classList.remove('hidden');
-      } else {
-        errorMsg.classList.remove('hidden');
-      }
+      await emailjs.sendForm(
+        'service_r2p8fjn',
+        'template_vbfsvgw',
+        waitlistForm
+      );
+      waitlistForm.reset();
+      document.getElementById('user_type').value = 'Student';
+      successMsg.classList.remove('hidden');
     } catch (err) {
+      console.error('EmailJS error:', err);
       errorMsg.classList.remove('hidden');
     } finally {
       btnText.classList.remove('hidden');
